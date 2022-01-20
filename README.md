@@ -4,4 +4,4 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/07c190603382ceb906ed/test_coverage)](https://codeclimate.com/github/VimLoko/php-project-lvl4/test_coverage)
 
 ### Ссылка:
-https://secure-brushlands-44465.herokuapp.com/
+http://secure-brushlands-44465.herokuapp.com/

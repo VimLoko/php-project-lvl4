@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    \Mail::raw('Hello World!', function($msg) {
-        $msg->from('us@example.com', 'Laravel');
-        $msg->to('myemail@gmail.com')->subject('Test Email');
-    });
     return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('task_statuses', TaskStatusController::class)
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
