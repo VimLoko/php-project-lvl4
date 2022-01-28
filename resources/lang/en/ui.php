@@ -27,6 +27,28 @@ return [
             'form_name' => 'Edit status',
             'name' => 'Name',
             'btn_update' => 'Edit',
+        ],
+        'edit_task_form' => [
+            'form_name' => 'Changing a task',
+            'name' => 'Name',
+            'description' => 'Description',
+            'status' => 'Status',
+            'assigned_to' => 'Executor',
+            'btn_update' => 'Update',
+        ],
+        'add_task_form' => [
+            'form_name' => 'Create task',
+            'name' => 'Name',
+            'description' => 'Description',
+            'status' => 'Status',
+            'assigned_to' => 'Executor',
+            'btn_create' => 'Create',
+        ],
+        'view_task_form' => [
+            'form_name' => 'Task view',
+            'name' => 'Name',
+            'status' => 'Status',
+            'description' => 'Description',
         ]
     ],
     'messages' => [
@@ -36,10 +58,17 @@ return [
         'edit_status_form_error' => 'Failed to update status',
         'delete_status_form_success' => 'Status deleted successfully',
         'delete_status_form_error' => 'Failed to delete status',
+        'add_task_form_success' => 'Task created successfully',
+        'add_task_form_error' => 'Failed to add task',
+        'edit_task_form_success' => 'Task updated successfully',
+        'edit_task_form_error' => 'Failed to update task',
+        'delete_task_form_success' => 'Task deleted successfully',
+        'delete_task_form_error' => 'Failed to delete status',
         'delete_question' => 'Are you sure?',
     ],
     'menu' => [
-        'task_statuses' => 'Statuses'
+        'task_statuses' => 'Statuses',
+        'tasks' => 'Tasks'
     ],
     'pages' => [
         'task_statuses' => [

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\TaskStatus;
 use App\Models\User;

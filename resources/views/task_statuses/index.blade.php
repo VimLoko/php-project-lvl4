@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ $task_status->id }}</td>
                                 <td>{{ $task_status->name }}</td>
-                                <td>{{ $task_status->created_at }}</td>
+                                <td>{{ $task_status->created_at->format('d.m.Y') }}</td>
                                 <td>
                                     @auth
                                         <a class="text-danger text-decoration-none"
@@ -36,7 +36,7 @@
                                         <a class="text-decoration-none"
                                            href="{{ route('task_statuses.edit', $task_status->id) }}">
                                             {{ __('ui.pages.task_statuses.link_edit') }}</a>
-                                    @endif
+                                    @endauth
                                 </td>
                             </tr>
                         @endforeach

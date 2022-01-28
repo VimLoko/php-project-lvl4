@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskStatusRequest;
 use App\Http\Requests\UpdateTaskStatusRequest;
 use App\Models\TaskStatus;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TaskStatusController extends Controller
 {
@@ -20,7 +21,7 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        $task_statuses = TaskStatus::paginate(5);
+        $task_statuses = TaskStatus::paginate(10);
         return view('task_statuses.index', compact('task_statuses'));
     }
 
@@ -105,11 +106,14 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        if ($taskStatus->delete()) {
+        try {
+            $this->authorize('delete', $taskStatus);
+            $taskStatus->delete();
             flash(__('ui.messages.delete_status_form_success'))->success();
-        } else {
+        }catch (AuthorizationException $e) {
             flash(__('ui.messages.delete_status_form_error'))->error();
+        } finally {
+            return redirect()->route('task_statuses.index');
         }
-        return redirect()->route('task_statuses.index');
     }
 }
