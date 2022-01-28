@@ -12,6 +12,8 @@ use function route;
 
 class TaskStatusControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
