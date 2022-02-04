@@ -66,7 +66,7 @@ return [
         ],
     ],
     'messages' => [
-        'add_status_form_success' => 'Статус успешно добавлен',
+        'add_status_form_success' => 'Статус успешно создан',
         'add_status_form_error' => 'Не удалось добавить статус',
         'edit_status_form_success' => 'Статус успешно обновлен',
         'edit_status_form_error' => 'Не удалось обновить статус',
@@ -78,7 +78,7 @@ return [
         'edit_task_form_error' => 'Не удалось обновить задачу',
         'delete_task_form_success' => 'Задача успешно удалена',
         'delete_task_form_error' => 'Не удалось удалить задачу',
-        'add_label_form_success' => 'Метка успешно добавлена',
+        'add_label_form_success' => 'Метка успешно создана',
         'add_label_form_error' => 'Не удалось добавить метку',
         'edit_label_form_success' => 'Метка успешно обновлена',
         'edit_label_form_error' => 'Не удалось обновить метку',
