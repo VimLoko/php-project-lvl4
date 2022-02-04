@@ -114,6 +114,7 @@ return [
             'assigned_to' => 'Исполнитель',
             'created_at' => 'Дата создания',
             'actions' => 'Действия',
+            'btn_apply' => 'Применить',
         ],
         'labels' => [
             'name_page' => 'Метки',

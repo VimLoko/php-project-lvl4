@@ -9,6 +9,8 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -22,10 +24,19 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::paginate(10);
-        return view('tasks.index', compact('tasks'));
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->paginate(10);
+        $filter = $request->filter ?? null;
+        $statuses = TaskStatus::all()->pluck('name','id');
+        $users = User::all()->pluck('name','id');
+        return view('tasks.index', compact('tasks', 'statuses', 'users', 'filter'));
     }
 
     /**

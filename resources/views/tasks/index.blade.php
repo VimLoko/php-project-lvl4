@@ -4,8 +4,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
                 @include('flash::message')
                 <h1 class="mb-5">{{ __('ui.pages.tasks.name_page') }}</h1>
+                <div>
+                    {!! Form::open(['url' => route('tasks.index'), 'method' => 'get']) !!}
+                    <div class="row g-1">
+                        <div class="col">
+                            {{old('filter[status_id]')}}
+                        {!! Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['class' => 'form-select me-2', 'placeholder' => __('ui.pages.tasks.status')]) !!}
+                        </div>
+                        <div class="col">
+                            {!! Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['class' => 'form-select me-2', 'placeholder' => __('ui.pages.tasks.author')]) !!}
+                        </div>
+                        <div class="col">
+                            {!! Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ?? null, ['class' => 'form-select me-2', 'placeholder' => __('ui.pages.tasks.assigned_to')]) !!}
+                        </div>
+                        <div class="col">
+                            {!! Form::submit(__('ui.pages.tasks.btn_apply'), ['class' => 'btn btn-outline-primary me-2']) !!}
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
                 @auth
                     <a href="{{ route('tasks.create') }}" class="btn btn-primary">{{ __('ui.pages.tasks.btn_create') }}</a>
                 @endif
