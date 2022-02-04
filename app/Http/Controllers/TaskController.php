@@ -127,14 +127,15 @@ class TaskController extends Controller
                 'name',
                 'description',
                 'status_id',
-                'created_by_id',
                 'assigned_to_id',
                 'labels'
             ]);
             $task->fill($validatedData);
             $task->save();
-            $labels = Label::find($validatedData['labels']);
-            $task->labels()->sync($labels);
+            if (array_key_exists('labels', $validatedData)) {
+                $labels = Label::find($validatedData['labels']);
+                $task->labels()->sync($labels);
+            }
             flash(__('ui.messages.edit_task_form_success'))->success();
         } catch (\Exception $e) {
             flash(__('ui.messages.edit_task_form_error'))->error();
