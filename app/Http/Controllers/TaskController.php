@@ -33,17 +33,17 @@ class TaskController extends Controller
             ->orderBy('created_at', 'ASC')
             ->paginate(10);
         $filter = $request->filter ?? null;
-        $statuses = TaskStatus::all()->pluck('name', 'id');
-        $users = User::all()->pluck('name', 'id');
+        $statuses = TaskStatus::pluck('name', 'id')->all();
+        $users = User::pluck('name', 'id')->all();
         return view('tasks.index', compact('tasks', 'statuses', 'users', 'filter'));
     }
 
     public function create()
     {
         $task = new Task();
-        $statuses = TaskStatus::all()->pluck('name', 'id');
-        $users = User::all()->pluck('name', 'id');
-        $labels = Label::all()->pluck('name', 'id');
+        $statuses = TaskStatus::pluck('name', 'id')->all();
+        $users = User::pluck('name', 'id')->all();
+        $labels = Label::pluck('name', 'id')->all();
         return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
@@ -57,9 +57,8 @@ class TaskController extends Controller
                 'assigned_to_id',
                 'labels'
             ]);
-            $task = new Task();
+            $task = Auth::user()->taskAuthor()->make();
             $task->fill($validatedData);
-            $task->created_by_id = Auth::user()->id;
             $task->save();
             if (array_key_exists('labels', $validatedData)) {
                 $labels = Label::find($validatedData['labels']);
@@ -80,9 +79,9 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $statuses = TaskStatus::all()->pluck('name', 'id');
-        $users = User::all()->pluck('name', 'id');
-        $labels = Label::all()->pluck('name', 'id');
+        $statuses = TaskStatus::pluck('name', 'id')->all();
+        $users = User::pluck('name', 'id')->all();
+        $labels = Label::pluck('name', 'id')->all();
         return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
