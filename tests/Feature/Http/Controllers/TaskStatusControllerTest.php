@@ -86,7 +86,7 @@ class TaskStatusControllerTest extends TestCase
     {
         $taskStatus = TaskStatus::factory()->create();
         $taskStatusChanged = ['name' => 'Test Task Status Changed'];
-        $response = $this->patch(route('task_statuses.update', $taskStatus, $taskStatusChanged));
+        $response = $this->patch(route('task_statuses.update', ['task_status' => $taskStatus]), $taskStatusChanged);
         $response->assertStatus(302);
         $response->assertRedirect(route('login'));
         $this->assertGuest();
