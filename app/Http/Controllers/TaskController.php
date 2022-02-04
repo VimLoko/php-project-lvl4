@@ -75,7 +75,9 @@ class TaskController extends Controller
             $task->fill($validatedData);
             $task->save();
             $labels = Label::find($validatedData['labels']);
-            $task->labels()->attach($labels);
+            if (count($labels) > 0) {
+                $task->labels()->attach($labels);
+            }
             flash(__('ui.messages.add_task_form_success'))->success();
         } catch (\Exception $e) {
             flash(__('ui.messages.add_task_form_error'))->error();
