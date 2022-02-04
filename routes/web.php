@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{TaskController, TaskStatusController};
+use App\Http\Controllers\{TaskController, TaskStatusController, LabelController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +26,7 @@ Route::resource('task_statuses', TaskStatusController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
 Route::resource('tasks', TaskController::class);
+
+Route::resource('labels', LabelController::class)
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 

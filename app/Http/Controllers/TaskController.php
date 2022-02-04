@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -37,9 +38,8 @@ class TaskController extends Controller
         $task = new Task();
         $statuses = TaskStatus::all()->pluck('name','id');
         $users = User::all()->pluck('name','id');
-        $statuses->prepend('---------', null);
-        $users->prepend('---------', null);
-        return view('tasks.create', compact('task', 'statuses', 'users'));
+        $labels = Label::all()->pluck('name','id');
+        return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
     /**
@@ -50,17 +50,34 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        $validatedData = $request->only(['name', 'description', 'status_id', 'created_by_id', 'assigned_to_id']);
-
-        $task = new Task();
-        $task->fill($validatedData);
-        if ($task->save()) {
+        try {
+            $validatedData = $request->only([
+                'name',
+                'description',
+                'status_id',
+                'created_by_id',
+                'assigned_to_id',
+                'labels'
+            ]);
+            $task = new Task();
+            $task->fill($validatedData);
+            $task->save();
+            $labels = Label::find($validatedData['labels']);
+            $task->labels()->attach($labels);
             flash(__('ui.messages.add_task_form_success'))->success();
-        } else {
+        } catch (\Exception $e) {
             flash(__('ui.messages.add_task_form_error'))->error();
+        } finally {
+            return redirect()->route('tasks.index');
         }
 
-        return redirect()->route('tasks.index');
+//        if ($task->save()) {
+//            flash(__('ui.messages.add_task_form_success'))->success();
+//        } else {
+//            flash(__('ui.messages.add_task_form_error'))->error();
+//        }
+
+
     }
 
     /**
@@ -84,9 +101,8 @@ class TaskController extends Controller
     {
         $statuses = TaskStatus::all()->pluck('name','id');
         $users = User::all()->pluck('name','id');
-        $statuses->prepend('---------', null);
-        $users->prepend('---------', null);
-        return view('tasks.edit', compact('task', 'statuses', 'users'));
+        $labels = Label::all()->pluck('name','id');
+        return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
     /**
@@ -98,14 +114,33 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $validatedData = $request->only(['name', 'description', 'status_id', 'created_by_id', 'assigned_to_id']);
-        $task->fill($validatedData);
-        if ($task->save()) {
+        try {
+            $validatedData = $request->only([
+                'name',
+                'description',
+                'status_id',
+                'created_by_id',
+                'assigned_to_id',
+                'labels'
+            ]);
+            $task->fill($validatedData);
+            $task->save();
+            $labels = Label::find($validatedData['labels']);
+            $task->labels()->sync($labels);
             flash(__('ui.messages.edit_task_form_success'))->success();
-        } else {
+        } catch (\Exception $e) {
             flash(__('ui.messages.edit_task_form_error'))->error();
+        } finally {
+            return redirect()->route('tasks.index');
         }
-        return redirect()->route('tasks.index');
+
+//        $task->fill($validatedData);
+//        if ($task->save()) {
+//            flash(__('ui.messages.edit_task_form_success'))->success();
+//        } else {
+//            flash(__('ui.messages.edit_task_form_error'))->error();
+//        }
+//        return redirect()->route('tasks.index');
     }
 
     /**
@@ -117,10 +152,15 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $this->authorize('delete', $task);
+        try {
+            $task->delete();
+            $task->labels()->detach();
+            flash(__('ui.messages.delete_task_form_success'))->success();
+        } catch (\Exception $e) {
+            flash(__('ui.messages.delete_task_form_error'))->success();
+        } finally {
+            return redirect()->route('tasks.index');
+        }
 
-        $task->delete();
-        flash(__('ui.messages.delete_task_form_success'))->success();
-
-        return redirect()->route('tasks.index');
     }
 }

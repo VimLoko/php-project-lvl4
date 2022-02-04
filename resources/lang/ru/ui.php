@@ -42,6 +42,7 @@ return [
             'description' => 'Описание',
             'status' => 'Статус',
             'assigned_to' => 'Исполнитель',
+            'labels' => 'Метки',
             'btn_create' => 'Создать',
         ],
         'view_task_form' => [
@@ -49,7 +50,20 @@ return [
             'name' => 'Имя',
             'status' => 'Статус',
             'description' => 'Описание',
-        ]
+            'labels' => 'Метки',
+        ],
+        'add_label_form' => [
+            'form_name' => 'Создать метку',
+            'name' => 'Имя',
+            'description' => 'Описание',
+            'btn_create' => 'Создать',
+        ],
+        'edit_label_form' => [
+            'form_name' => 'Изменение метки',
+            'name' => 'Имя',
+            'description' => 'Описание',
+            'btn_update' => 'Обновить',
+        ],
     ],
     'messages' => [
         'add_status_form_success' => 'Статус успешно добавлен',
@@ -64,11 +78,18 @@ return [
         'edit_task_form_error' => 'Не удалось обновить задачу',
         'delete_task_form_success' => 'Задача успешно удалена',
         'delete_task_form_error' => 'Не удалось удалить задачу',
+        'add_label_form_success' => 'Метка успешно добавлена',
+        'add_label_form_error' => 'Не удалось добавить метку',
+        'edit_label_form_success' => 'Метка успешно обновлена',
+        'edit_label_form_error' => 'Не удалось обновить метку',
+        'delete_label_form_success' => 'Метка успешно удалена',
+        'delete_label_form_error' => 'Не удалось удалить метку',
         'delete_question' => 'Вы уверены?',
     ],
     'menu' => [
         'task_statuses' => 'Статусы',
-        'tasks' => 'Задачи'
+        'tasks' => 'Задачи',
+        'labels' => 'Метки'
     ],
     'pages' => [
         'task_statuses' => [
@@ -91,6 +112,17 @@ return [
             'name' => 'Имя',
             'author' => 'Автор',
             'assigned_to' => 'Исполнитель',
+            'created_at' => 'Дата создания',
+            'actions' => 'Действия',
+        ],
+        'labels' => [
+            'name_page' => 'Метки',
+            'btn_create' => 'Создать метку',
+            'link_delete' => 'Удалить',
+            'link_edit' => 'Изменить',
+            'id' => 'ID',
+            'name' => 'Имя',
+            'description' => 'Описание',
             'created_at' => 'Дата создания',
             'actions' => 'Действия',
         ],

@@ -46,6 +46,12 @@
                                 {{ __('ui.menu.task_statuses') }}
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ route('labels.index') }}">
+                                {{ __('ui.menu.labels') }}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

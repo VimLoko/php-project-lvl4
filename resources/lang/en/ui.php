@@ -42,6 +42,7 @@ return [
             'description' => 'Description',
             'status' => 'Status',
             'assigned_to' => 'Executor',
+            'labels' => 'Labels',
             'btn_create' => 'Create',
         ],
         'view_task_form' => [
@@ -49,7 +50,20 @@ return [
             'name' => 'Name',
             'status' => 'Status',
             'description' => 'Description',
-        ]
+            'labels' => 'Labels',
+        ],
+        'add_label_form' => [
+            'form_name' => 'Create label',
+            'name' => 'Name',
+            'description' => 'Description',
+            'btn_create' => 'Create',
+        ],
+        'edit_label_form' => [
+            'form_name' => 'Edit label',
+            'name' => 'Name',
+            'description' => 'Description',
+            'btn_update' => 'Update',
+        ],
     ],
     'messages' => [
         'add_status_form_success' => 'Status added successfully',

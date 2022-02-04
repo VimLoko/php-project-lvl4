@@ -13,6 +13,17 @@
                 <p>{{ __('ui.forms.view_task_form.name') }}: {{ $task->name }}</p>
                 <p>{{ __('ui.forms.view_task_form.status') }}: {{ $task->status->name }}</p>
                 <p>{{ __('ui.forms.view_task_form.description') }}: {{ $task->description }}</p>
+                @if($task->labels->count() > 0)
+
+                    <p>
+                        {{ __('ui.forms.view_task_form.labels') }}:
+                        <ul>
+                        @foreach($task->labels as $label)
+                            <li>{{$label->name}}</li>
+                        @endforeach
+                        </ul>
+                    </p>
+                @endif
             </div>
         </div>
     </div>

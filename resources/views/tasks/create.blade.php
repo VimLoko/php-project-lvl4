@@ -22,25 +22,37 @@
 
                         {{ Form::label('status_id', __('ui.forms.add_task_form.status'))  }}
                         @error('status_id')
-                            {{ Form::select('status_id', $statuses, null, ['class' => 'form-control mb-3 is-invalid']) }}
+                            {{ Form::select('status_id', $statuses, null, ['class' => 'form-control mb-3 is-invalid', 'placeholder' => '------']) }}
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @else
-                            {{ Form::select('status_id', $statuses, null, ['class' => 'form-control mb-3']) }}
+                            {{ Form::select('status_id', $statuses, null, ['class' => 'form-control mb-3', 'placeholder' => '------']) }}
                         @enderror
 
                         {{ Form::hidden('created_by_id', Auth::user()->id)  }}
 
                         {{ Form::label('assigned_to_id', __('ui.forms.add_task_form.assigned_to'))  }}
                         @error('assigned_to_id')
-                            {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control mb-3 is-invalid']) }}
+                            {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control mb-3 is-invalid', 'placeholder' => '------']) }}
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @else
-                            {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control mb-3']) }}
+                            {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control mb-3', 'placeholder' => '------']) }}
                         @enderror
+
+                        {{ Form::label('labels', __('ui.forms.add_task_form.labels'))  }}
+                        @error('assigned_to_id')
+                            {{ Form::select('labels[]', $labels, null, ['class' => 'form-control mb-3 is-invalid', 'placeholder' => '', 'multiple']) }}
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @else
+                            {{ Form::select('labels[]', $labels, null, ['class' => 'form-control mb-3', 'placeholder' => '', 'multiple']) }}
+                        @enderror
+
+
                     </div>
                     {{ Form::submit(__('ui.forms.add_task_form.btn_create'), ['class' => 'btn btn-primary mt-3']) }}
                 {{ Form::close() }}
