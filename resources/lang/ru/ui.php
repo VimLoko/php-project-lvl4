@@ -68,7 +68,7 @@ return [
     'messages' => [
         'add_status_form_success' => 'Статус успешно создан',
         'add_status_form_error' => 'Не удалось добавить статус',
-        'edit_status_form_success' => 'Статус успешно обновлен',
+        'edit_status_form_success' => 'Статус успешно изменён',
         'edit_status_form_error' => 'Не удалось обновить статус',
         'delete_status_form_success' => 'Статус успешно удалён',
         'delete_status_form_error' => 'Не удалось удалить статус',
