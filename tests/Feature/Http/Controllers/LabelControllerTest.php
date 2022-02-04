@@ -103,21 +103,6 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseMissing('labels', $label->toArray());
     }
 
-    public function testDeleteLabelIfTaskHaveThisLabel()
-    {
-        $user = User::factory()->create();
-        $label = Label::factory()->create();
-        $task = Task::factory()->create();
-        $task->labels()->attach($label);
-        $response = $this->actingAs($user)
-            ->delete(route('labels.destroy', $label));
-        $response->assertRedirect(route('labels.index'));
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('labels', [
-            'id' => $label->id
-        ]);
-    }
-
     protected function tearDown(): void
     {
         DB::rollBack();

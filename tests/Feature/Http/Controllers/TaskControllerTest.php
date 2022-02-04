@@ -40,7 +40,6 @@ class TaskControllerTest extends TestCase
         $user = User::factory()->create();
         $response = $this->actingAs($user)
             ->get(route('tasks.create'));
-        $this->assertAuthenticatedAs($user);
         $response->assertOk();
     }
 
@@ -61,7 +60,6 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
         $response->assertStatus(302);
-        $this->assertAuthenticatedAs($user);
         $this->assertDatabaseHas('tasks', [
             'name' => $task['name']
         ]);
@@ -82,7 +80,6 @@ class TaskControllerTest extends TestCase
         $task = Task::factory()->create();
         $response = $this->actingAs($user)
             ->get(route('tasks.edit', $task));
-        $this->assertAuthenticatedAs($user);
         $response->assertOk();
     }
 
@@ -115,7 +112,6 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
         $response->assertStatus(302);
-        $this->assertAuthenticatedAs($user);
         $this->assertDatabaseMissing('tasks', $task->toArray());
     }
 
