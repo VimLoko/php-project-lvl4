@@ -70,7 +70,7 @@ return [
         'add_status_form_error' => 'Не удалось добавить статус',
         'edit_status_form_success' => 'Статус успешно обновлен',
         'edit_status_form_error' => 'Не удалось обновить статус',
-        'delete_status_form_success' => 'Статус успешно удален',
+        'delete_status_form_success' => 'Статус успешно удалён',
         'delete_status_form_error' => 'Не удалось удалить статус',
         'add_task_form_success' => 'Задача успешно создана',
         'add_task_form_error' => 'Не удалось добавить задачу',
