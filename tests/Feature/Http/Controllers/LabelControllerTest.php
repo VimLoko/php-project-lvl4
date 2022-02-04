@@ -41,7 +41,6 @@ class LabelControllerTest extends TestCase
         $user = User::factory()->create();
         $response = $this->actingAs($user)
             ->get(route('labels.create'));
-        $this->assertAuthenticatedAs($user);
         $response->assertOk();
     }
 
@@ -62,7 +61,6 @@ class LabelControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
         $response->assertStatus(302);
-        $this->assertAuthenticatedAs($user);
         $this->assertDatabaseHas('labels', $label);
     }
 
@@ -81,7 +79,6 @@ class LabelControllerTest extends TestCase
         $label = Label::factory()->create();
         $response = $this->actingAs($user)
             ->get(route('labels.edit', $label));
-        $this->assertAuthenticatedAs($user);
         $response->assertOk();
     }
 
@@ -103,7 +100,6 @@ class LabelControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
         $response->assertStatus(302);
-        $this->assertAuthenticatedAs($user);
         $this->assertDatabaseMissing('labels', $label->toArray());
     }
 
@@ -117,7 +113,6 @@ class LabelControllerTest extends TestCase
             ->delete(route('labels.destroy', $label));
         $response->assertRedirect(route('labels.index'));
         $response->assertStatus(302);
-        $this->assertAuthenticatedAs($user);
         $this->assertDatabaseHas('labels', [
             'id' => $label->id
         ]);
