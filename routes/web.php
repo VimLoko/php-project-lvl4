@@ -25,4 +25,3 @@ Route::resource('tasks', TaskController::class);
 
 Route::resource('labels', LabelController::class)
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-

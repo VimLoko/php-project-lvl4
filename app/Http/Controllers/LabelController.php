@@ -40,7 +40,7 @@ class LabelController extends Controller
             $validatedData = $request->only(['name', 'description']);
             $label = new Label();
             $label->fill($validatedData);
-            DB::transaction(function() use ($label) {
+            DB::transaction(function () use ($label) {
                 $label->save();
             }, 3);
             flash(__('ui.messages.add_label_form_success'))->success();
@@ -74,7 +74,7 @@ class LabelController extends Controller
         try {
             $validatedData = $request->only(['name', 'description']);
             $label->fill($validatedData);
-            DB::transaction(function() use ($label) {
+            DB::transaction(function () use ($label) {
                 $label->save();
             }, 3);
             flash(__('ui.messages.edit_label_form_success'))->success();
@@ -97,11 +97,10 @@ class LabelController extends Controller
             $this->authorize('delete', $label);
             $label->delete();
             flash(__('ui.messages.delete_label_form_success'))->success();
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             flash(__('ui.messages.delete_label_form_error'))->error();
         } finally {
             return redirect()->route('labels.index');
         }
-
     }
 }

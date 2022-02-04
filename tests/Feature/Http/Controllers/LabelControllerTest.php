@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-
 class LabelControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -23,13 +22,13 @@ class LabelControllerTest extends TestCase
         DB::beginTransaction();
     }
 
-    public function test_label_index(): void
+    public function testLabelIndex(): void
     {
         $response = $this->get(route('labels.index'));
         $response->assertOk();
     }
 
-    public function test_create_without_autorize()
+    public function testCreateWithoutAutorize()
     {
         $response = $this->get(route('labels.create'));
         $response->assertStatus(302);
@@ -37,7 +36,7 @@ class LabelControllerTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_create_with_autorize()
+    public function testCreateWithAutorize()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user)
@@ -46,7 +45,7 @@ class LabelControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_store_without_autorize()
+    public function testStoreWithoutAutorize()
     {
         $label = Label::factory()->make();
         $response = $this->post(route('labels.store'), $label->toArray());
@@ -54,7 +53,7 @@ class LabelControllerTest extends TestCase
         $response->assertStatus(302);
     }
 
-    public function test_store_with_autorize()
+    public function testStoreWithAutorize()
     {
         $user = User::factory()->create();
         $label = Label::factory()->make()->toArray();
@@ -67,7 +66,7 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseHas('labels', $label);
     }
 
-    public function test_edit_without_autorize()
+    public function testEditWithoutAutorize()
     {
         $label = Label::factory()->create();
         $response = $this->get(route('labels.edit', $label));
@@ -76,7 +75,7 @@ class LabelControllerTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_edit_with_auth_user()
+    public function testEditWithAuthUser()
     {
         $user = User::factory()->create();
         $label = Label::factory()->create();
@@ -86,7 +85,7 @@ class LabelControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_delete_without_autorize()
+    public function testDeleteWithoutAutorize()
     {
         $label = Label::factory()->create();
         $response = $this->delete(route('labels.destroy', $label));
@@ -95,7 +94,7 @@ class LabelControllerTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_delete_with_auth_user()
+    public function testDeleteWithAuthUser()
     {
         $user = User::factory()->create();
         $label = Label::factory()->create();
@@ -108,7 +107,7 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseMissing('labels', $label->toArray());
     }
 
-    public function test_delete_label_if_task_have_this_label()
+    public function testDeleteLabelIfTaskHaveThisLabel()
     {
         $user = User::factory()->create();
         $label = Label::factory()->create();

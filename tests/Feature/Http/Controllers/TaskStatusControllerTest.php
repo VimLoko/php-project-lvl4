@@ -8,7 +8,6 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use function route;
 
 class TaskStatusControllerTest extends TestCase
 {

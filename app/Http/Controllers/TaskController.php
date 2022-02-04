@@ -36,8 +36,8 @@ class TaskController extends Controller
             ->orderBy('created_at', 'ASC')
             ->paginate(10);
         $filter = $request->filter ?? null;
-        $statuses = TaskStatus::all()->pluck('name','id');
-        $users = User::all()->pluck('name','id');
+        $statuses = TaskStatus::all()->pluck('name', 'id');
+        $users = User::all()->pluck('name', 'id');
         return view('tasks.index', compact('tasks', 'statuses', 'users', 'filter'));
     }
 
@@ -49,9 +49,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        $statuses = TaskStatus::all()->pluck('name','id');
-        $users = User::all()->pluck('name','id');
-        $labels = Label::all()->pluck('name','id');
+        $statuses = TaskStatus::all()->pluck('name', 'id');
+        $users = User::all()->pluck('name', 'id');
+        $labels = Label::all()->pluck('name', 'id');
         return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
@@ -85,7 +85,6 @@ class TaskController extends Controller
         } finally {
             return redirect()->route('tasks.index');
         }
-
     }
 
     /**
@@ -107,9 +106,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        $statuses = TaskStatus::all()->pluck('name','id');
-        $users = User::all()->pluck('name','id');
-        $labels = Label::all()->pluck('name','id');
+        $statuses = TaskStatus::all()->pluck('name', 'id');
+        $users = User::all()->pluck('name', 'id');
+        $labels = Label::all()->pluck('name', 'id');
         return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
@@ -170,6 +169,5 @@ class TaskController extends Controller
         } finally {
             return redirect()->route('tasks.index');
         }
-
     }
 }

@@ -110,7 +110,7 @@ class TaskStatusController extends Controller
             $this->authorize('delete', $taskStatus);
             $taskStatus->delete();
             flash(__('ui.messages.delete_status_form_success'))->success();
-        }catch (AuthorizationException $e) {
+        } catch (AuthorizationException $e) {
             flash(__('ui.messages.delete_status_form_error'))->error();
         } finally {
             return redirect()->route('task_statuses.index');
