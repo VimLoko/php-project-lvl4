@@ -3,5 +3,4 @@ parameters:
     reportMaybesInPropertyPhpDocTypes: false
     level: 6
     paths:
-        - tests
         - app/Http/Controllers

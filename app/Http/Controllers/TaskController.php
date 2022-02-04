@@ -20,11 +20,8 @@ class TaskController extends Controller
         $this->middleware('auth')
             ->only(['create', 'store', 'edit', 'update', 'destroy']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index(Request $request)
     {
         $tasks = QueryBuilder::for(Task::class)
@@ -41,11 +38,6 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks', 'statuses', 'users', 'filter'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $task = new Task();
@@ -55,12 +47,6 @@ class TaskController extends Controller
         return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Requests\StoreTaskRequest $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreTaskRequest $request)
     {
         try {
@@ -87,23 +73,11 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Task $task)
     {
         return view('tasks.show', compact('task'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Task $task)
     {
         $statuses = TaskStatus::all()->pluck('name', 'id');
@@ -112,13 +86,6 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  App\Models\Task $task
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Task $task)
     {
         try {
@@ -141,22 +108,8 @@ class TaskController extends Controller
         } finally {
             return redirect()->route('tasks.index');
         }
-
-//        $task->fill($validatedData);
-//        if ($task->save()) {
-//            flash(__('ui.messages.edit_task_form_success'))->success();
-//        } else {
-//            flash(__('ui.messages.edit_task_form_error'))->error();
-//        }
-//        return redirect()->route('tasks.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  App\Models\Task $task
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Task $task)
     {
         $this->authorize('delete', $task);

@@ -28,12 +28,6 @@ class LabelController extends Controller
         return view('labels.create', compact('label'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreLabelRequest $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreLabelRequest $request)
     {
         try {
@@ -51,24 +45,11 @@ class LabelController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Label $labels
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Label $label)
     {
         return view('labels.edit', compact('label'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateLabelRequest  $request
-     * @param  \App\Models\Label  $label
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateLabelRequest $request, Label $label)
     {
         try {
@@ -85,12 +66,6 @@ class LabelController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  App\Models\Label $label
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Label $label)
     {
         try {

@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Task::class => TaskPolicy::class,
