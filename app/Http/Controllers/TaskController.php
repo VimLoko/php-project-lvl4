@@ -9,6 +9,7 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -67,15 +68,15 @@ class TaskController extends Controller
                 'name',
                 'description',
                 'status_id',
-                'created_by_id',
                 'assigned_to_id',
                 'labels'
             ]);
             $task = new Task();
             $task->fill($validatedData);
+            $task->created_by_id = Auth::user()->id;
             $task->save();
-            $labels = Label::find($validatedData['labels']);
-            if (count($labels) > 0) {
+            if (array_key_exists('labels', $validatedData)) {
+                $labels = Label::find($validatedData['labels']);
                 $task->labels()->attach($labels);
             }
             flash(__('ui.messages.add_task_form_success'))->success();
@@ -84,13 +85,6 @@ class TaskController extends Controller
         } finally {
             return redirect()->route('tasks.index');
         }
-
-//        if ($task->save()) {
-//            flash(__('ui.messages.add_task_form_success'))->success();
-//        } else {
-//            flash(__('ui.messages.add_task_form_error'))->error();
-//        }
-
 
     }
 

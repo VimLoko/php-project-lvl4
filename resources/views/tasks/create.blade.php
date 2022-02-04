@@ -30,8 +30,6 @@
                             {{ Form::select('status_id', $statuses, null, ['class' => 'form-control mb-3', 'placeholder' => '------']) }}
                         @enderror
 
-                        {{ Form::hidden('created_by_id', Auth::user()->id)  }}
-
                         {{ Form::label('assigned_to_id', __('ui.forms.add_task_form.assigned_to'))  }}
                         @error('assigned_to_id')
                             {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control mb-3 is-invalid', 'placeholder' => '------']) }}

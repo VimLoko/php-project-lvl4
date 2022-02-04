@@ -26,7 +26,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'name' => 'required|unique:tasks',
             'status_id' => 'required',
-            'created_by_id' => 'required',
+//            'created_by_id' => 'required',
         ];
     }
 
@@ -35,7 +35,7 @@ class StoreTaskRequest extends FormRequest
         return [
             'name.required' => 'Это обязательное поле',
             'status_id.required' => 'Это обязательное поле',
-            'created_by_id.required' => 'Это обязательное поле',
+//            'created_by_id.required' => 'Это обязательное поле',
             'name.unique' => 'Задача с таким именем уже существует',
         ];
     }

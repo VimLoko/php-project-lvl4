@@ -63,7 +63,9 @@ class TaskControllerTest extends TestCase
         $response->assertRedirect(route('tasks.index'));
         $response->assertStatus(302);
         $this->assertAuthenticatedAs($user);
-        $this->assertDatabaseHas('tasks', $task);
+        $this->assertDatabaseHas('tasks', [
+            'name' => $task['name']
+        ]);
     }
 
     public function testEditWithoutAutorize()
